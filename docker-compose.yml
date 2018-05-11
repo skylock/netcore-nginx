@@ -1,0 +1,20 @@
+https-portal:
+  container_name: proxy
+  image: steveltn/https-portal
+  ports:
+    - '80:80'
+    - '443:443'
+  links:
+    - webapp
+  restart: always
+  environment:
+    DOMAINS: 'tedex.inovatek.ro -> http://webapp:5000'
+    STAGE: 'production'
+    # STAGE: local
+    # FORCE_RENEW: 'true'
+
+webapp:
+  container_name: webapp
+  image: skylock/aspnetapp
+  environment:
+    ASPNETCORE_URLS: 'http://*:5000'
