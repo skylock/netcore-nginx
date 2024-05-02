@@ -8,13 +8,13 @@ https-portal:
     - webapp
   restart: always
   environment:
-    DOMAINS: 'tedex.inovatek.ro -> http://webapp:5000'
+    DOMAINS: 'app.monetoplus.com -> http://webapp:5000'
     STAGE: 'production'
     # STAGE: local
     # FORCE_RENEW: 'true'
 
 webapp:
   container_name: webapp
-  image: skylock/aspnetapp
+  image: skylock/dotneteverywhere
   environment:
     ASPNETCORE_URLS: 'http://*:5000'
