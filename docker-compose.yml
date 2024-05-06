@@ -8,7 +8,7 @@ https-portal:
     - webapp
   restart: always
   environment:
-    DOMAINS: 'app.monetoplus.com -> http://webapp:5000'
+    DOMAINS: 'app.monetoplus.com -> http://webapp'
     STAGE: 'production'
     # STAGE: local
     # FORCE_RENEW: 'true'
@@ -16,5 +16,5 @@ https-portal:
 webapp:
   container_name: webapp
   image: skylock/dotneteverywhere
-  environment:
-    ASPNETCORE_URLS: 'http://*:5000'
+  ports:
+    - '5000:80'
