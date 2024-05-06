@@ -13,7 +13,7 @@ services:
     restart: always
     environment:
       DOMAINS: 'app.monetoplus.com -> http://webapp'
-      STAGE: 'production'
+      # STAGE: 'production'
       # STAGE: local
       # FORCE_RENEW: 'true'
     volumes:
