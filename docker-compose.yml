@@ -1,20 +1,29 @@
-https-portal:
-  container_name: proxy
-  image: steveltn/https-portal
-  ports:
-    - '80:80'
-    - '443:443'
-  links:
-    - webapp
-  restart: always
-  environment:
-    DOMAINS: 'app.monetoplus.com -> http://webapp'
-    STAGE: 'production'
-    # STAGE: local
-    # FORCE_RENEW: 'true'
+version: '3'
 
-webapp:
-  container_name: webapp
-  image: skylock/dotneteverywhere
-  ports:
-    - '5000:80'
+services:
+
+  https-portal:
+    container_name: proxy
+    image: steveltn/https-portal
+    ports:
+      - '80:80'
+      - '443:443'
+    links:
+      - webapp
+    restart: always
+    environment:
+      DOMAINS: 'app.monetoplus.com -> http://webapp'
+      STAGE: 'production'
+      # STAGE: local
+      # FORCE_RENEW: 'true'
+    volumes:
+      - https-portal-data:/var/lib/https-portal
+
+  webapp:
+    container_name: webapp
+    image: skylock/dotneteverywhere
+    ports:
+      - '5000:80'
+
+volumes:
+    https-portal-data: # Recommended, to avoid re-signing when upgrading HTTPS-PORTAL
